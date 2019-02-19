@@ -1,12 +1,16 @@
 .btn-secondary {
-  color: #fff !important; }
+  color: #fff !important; 
+}
 
 img {
   width: 100%; }
 
 .logo {
   width: 80px; }
-
+.red {
+    font-size: 50px;
+    color: 	#8B0000;
+  }
 .navbar {
   opacity: 0.9;
   text-transform: uppercase; }
@@ -23,7 +27,8 @@ img {
   #showcase .home-search {
     min-height: 400px;
     position: relative;
-    border-radius: 5px; }
+    border-radius: 5px; 
+  }
   #showcase .overlay {
     content: '';
     position: absolute;
@@ -85,14 +90,17 @@ img {
     #showcase p {
       display: none; }
   #top-bar {
-    text-align: center; }
+    text-align: center;
+  
+  }
   #top-bar .social {
       text-align: center !important; 
     }
-      
+    
 
 @media (max-width: 576px) {
   #showcase h1 {
     font-size: 30px; }
   #showcase-inner h1 {
     font-size: 40px; } }
+  }

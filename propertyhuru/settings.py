@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'listings.apps.ListingsConfig',
     'realtors.apps.RealtorsConfig',
     'crispy_forms',
+    'contacts.apps.ContactsConfig',
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
     'django.contrib.admin',
@@ -149,4 +150,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+EMAIL_HOST_PASSWORD = "girxrfquutjsdykq"

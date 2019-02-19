@@ -14,6 +14,7 @@ from .choices import price_choices, city_choices, bedroom_choices, category_choi
 from .models import Listing
 from django.urls import reverse
 from users.models import Profile
+from contacts.models import Contact
 
 class ListingListView(ListView):
     model = Listing
@@ -79,20 +80,12 @@ class DashboardListingListView(LoginRequiredMixin, ListView):
     template_name = 'users/user_dashboard.html' #<app>/<model>_<vietype>.html
     context_object_name = 'listings'
     ordering = '-list_date'
-    paginate_by = 6
+    paginate_by = 3
    
     def get_queryset(self):
         queryset = super(DashboardListingListView, self).get_queryset()
         queryset = queryset.filter(realtor=self.request.user)
         return queryset
-
-class FavouriteListingListView(LoginRequiredMixin, ListView):
-    model = Listing
-    template_name = 'users/user_favourites.html'
-    context_object_name = 'listing'
-    ordering = '-list_date'
-    paginate_by = 6
-
 
 def search(request):
     queryset_list = Listing.objects.order_by('-list_date').filter(is_published=True)
@@ -157,3 +150,12 @@ def publish(request, listing_id):
         messages.success(request, 'Your listing is now active!')
         return redirect('/listings/')
 
+
+def inquiries(request):
+    user_contacts = Contact.objects.order_by('-contact_date').filter(user_id=request.user.id)
+
+    context = {
+        'contacts': user_contacts
+    }
+
+    return render(request, 'users/user_inquiries.html', context)
