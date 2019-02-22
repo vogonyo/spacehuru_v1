@@ -36,11 +36,13 @@
                                 <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'listing-update' listing.id  %}">Update </a>
                                 <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'listing-delete' listing.id  %}">Delete </a>
                                 {% if not listing.is_published %}
-                                   <a href="javascript:{document.getElementById('publish').submit()}" class="btn btn-danger btn-sm mt-1 mb-1">Publish</a>
+                                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'listing-publish' listing.id  %}">Publish </a>
+
+                                   <!-- <a href="javascript:{document.getElementById('publish').submit()}" class="btn btn-danger btn-sm mt-1 mb-1">Publish</a>
                                    <form id="publish" method="POST" action="{% url 'listing-publish' listing.id %}">
                                        {% csrf_token %}
                                        <input type="hidden">
-                                   </form>
+                                   </form> -->
                                 {% endif %}
                             </div>
                           </div>

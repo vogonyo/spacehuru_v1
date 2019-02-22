@@ -141,9 +141,11 @@
                 </div>
               </div>
             </div>
+
+            
             <div class="col-md-3">
               <div class="card mb-3">
-                <img class="card-img-top" src="{{ user.profile.image.url }}" alt="{{ user.username }}">
+                <img class="card-img-top" src="{{ realtor.image.url }}" alt="{{ realtor.username }}">
                 <div class="card-body">
                     {% if object.realtor == user %}
                     <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'listing-update' object.id  %}">Update </a>

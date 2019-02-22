@@ -16,14 +16,14 @@ from django.urls import reverse
 from users.models import Profile
 from contacts.models import Contact
 
+
 class ListingListView(ListView):
     model = Listing
     template_name = 'listings/listings.html' #<app>/<model>_<vietype>.html
     context_object_name = 'listings'
     ordering = ['-list_date']
     queryset = Listing.objects.filter(is_published=True)
-    paginate_by = 3
-    
+    paginate_by = 6
 
 class UserListingListView(ListView):
     model = Listing
@@ -143,14 +143,21 @@ def search(request):
 
 
 def publish(request, listing_id):
+    listing = get_object_or_404(Listing, pk=listing_id)
+
+    context = {
+      'listing': listing
+    }
+    return render(request, 'listings/payments.html', context)
+
+def makepayment(request, listing_id):
     if request.method == 'POST':
         listing = get_object_or_404(Listing, pk=listing_id)
         listing.is_published = True
         listing.save()
-        messages.success(request, 'Your listing is now active!')
+        messages.success(request, 'Your listing is now active')
         return redirect('/listings/')
-
-
+        
 def inquiries(request):
     user_contacts = Contact.objects.order_by('-contact_date').filter(user_id=request.user.id)
 
@@ -159,3 +166,4 @@ def inquiries(request):
     }
 
     return render(request, 'users/user_inquiries.html', context)
+

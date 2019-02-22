@@ -5,11 +5,12 @@ from listings.models import Listing
 from realtors.models import Realtor
 from django.contrib.auth.models import User
 from django.views.generic import ListView
+from blog.models import Blog
 
 
 
     
-def about(request):
+def brands(request):
     #Get All Realtors
     realtors = Realtor.objects.all()   
 
@@ -17,9 +18,18 @@ def about(request):
         'realtors': realtors,
     
     }
-    return render(request, 'pages/about.html', context)
+    return render(request, 'pages/brands.html', context)
 
 
+def blog(request):
+    #Get All Realtors
+    blogs = Blog.objects.all()   
+
+    context = {
+        'blogs': blogs,
+    
+    }
+    return render(request, 'pages/blogs.html', context)
 class ListingListView(ListView):
     model = Listing
     template_name = 'pages/index.html' #<app>/<model>_<vietype>.html

@@ -4,5 +4,7 @@ from . import views
 
 urlpatterns = [
     path('', ListingListView.as_view(), name ='index'),
-    path('about', views.about, name='about'),
+    path('brands', views.brands, name='brands'),
+    path('blog', views.blog, name='blog'),
+
 ]

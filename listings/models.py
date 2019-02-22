@@ -167,16 +167,15 @@ class Listing(models.Model):
     photo_5 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     photo_6 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     is_published = models.BooleanField(default=False)
-    is_favourite = models.BooleanField(default=False)
     list_date = models.DateTimeField('date created', blank=True, auto_now=True)
     
     def __str__(self):
         return self.title
     
-    
     def get_absolute_url(self): 
        return reverse("user-dashboard") 
 
+    
     def save(self, *args, **kwargs): 
         if self.is_published and self.list_date is None:
             self.list_date = datetime.datetime.now()
@@ -184,7 +183,6 @@ class Listing(models.Model):
             self.list_date = None
         super(Listing, self).save(*args, **kwargs)
 
-    
     def get_time_diff(self):
         if self.list_date:
             now = datetime.datetime.utcnow().replace(tzinfo=utc)
@@ -193,9 +191,9 @@ class Listing(models.Model):
     
     get_time_diff.short_description = 'Days Listed'
 
+        
 
-
-
+        
 
 
          

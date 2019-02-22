@@ -4,6 +4,7 @@
 
  {% block content %}
     <div class="container">
+        {% include 'partials/_alerts.html' %}
         <form action="" method="POST">
             {% csrf_token %}
             <fieldset class="form-group">

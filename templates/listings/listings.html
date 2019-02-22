@@ -33,6 +33,7 @@
   <section id="listings" class="py-4">
     <div class="container">
       <div class="row">
+        {% include 'partials/_alerts.html' %}
         {% if listings %}
             {% for listing in listings %}
               <div class="col-md-6 col-lg-4 mb-4">
@@ -73,7 +74,7 @@
                               </div>
                               <hr>
                               <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block">More Info</a>
-                            </div>
+                              </div>
                           </div>
                         </div>
                   {% endfor %}

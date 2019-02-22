@@ -26,7 +26,16 @@
                 class="nav-item mr-3"
               {% endif %}
            >
-                <a class="nav-link" href="{% url 'about' %}">About</a>
+                <a class="nav-link" href="{% url 'brands' %}">Brands</a>
+              </li>
+              <li 
+              {% if 'blog' in request.path %}
+                class="nav-item active mr-3"
+              {% else %}
+                class="nav-item mr-3"
+              {% endif %}
+           >
+                <a class="nav-link" href="{% url 'blog' %}">Blog</a>
               </li>
               <li 
               {% if 'listings' in request.path %}
@@ -73,17 +82,3 @@
           </div>
         </div>
       </nav>
-     <div class="container">
-       <div class="row">
-        <div class="col-md-8">
-          {% if messages %}
-             {% for message in messages %}
-                <div class="alert alert-{{ message.tags}}">
-                  {{ message }}
-                </div>
-              {% endfor %}
-          {% endif %}
-          {% block content %}{% endblock %}
-        </div>
-       </div>
-     </div>
