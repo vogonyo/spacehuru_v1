@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Listing
+from .models import Listing, Review
 
 class ListingAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'is_published', 'category', 'price', 'billing', 'list_date', 'realtor', 'get_time_diff')
@@ -10,3 +10,4 @@ class ListingAdmin(admin.ModelAdmin):
     list_per_page = 25
 
 admin.site.register(Listing, ListingAdmin)
+admin.site.register(Review)

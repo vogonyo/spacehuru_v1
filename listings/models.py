@@ -75,7 +75,19 @@ class Listing(models.Model):
     STUDIOS = 'ST'
     WAREHOUSES = 'WR'
     SHOPS = 'SH'
-
+    HOTELS = 'HT'
+    RESTAURANTS = 'RT'
+    
+    
+    #Billing Choices
+    DAY = 'DY'
+    MONTH = 'MT'
+    DESK = 'DK'
+    WEEK = 'WK'
+    HOUR = 'HR'
+    NIGHT = 'NT'
+    #Usage Choices
+    
 
 
     AREA_CHOICES = {
@@ -144,6 +156,14 @@ class Listing(models.Model):
        (WAREHOUSES, 'Warehouses'),
        (SHOPS, 'Shops'),
     )
+    BILLING_CHOICES = (
+        (HOUR, 'Hour'),
+        (DAY, 'Day'),
+        (MONTH, 'Month'),
+        (WEEK, 'Week'),
+        (DESK, 'Desk'),
+        (NIGHT, 'Night')
+    )
 
     category = models.CharField(max_length=2, choices=CATEGORY_CHOICES)
     realtor = models.ForeignKey(User, on_delete=models.DO_NOTHING)
@@ -153,9 +173,7 @@ class Listing(models.Model):
     city = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     price = models.IntegerField(blank=True, default = 0)
-    billing = models.CharField(max_length=200, blank=True)
-    minPrice = models.IntegerField(blank=True, default = 0)
-    maxPrice = models.IntegerField(blank=True, default = 0)
+    billing = models.CharField(max_length=200, choices=BILLING_CHOICES, blank=True)
     bedrooms = models.IntegerField(blank=True, default = 0)
     bathrooms = models.IntegerField(blank=True, default = 0)
     sqft = models.IntegerField(blank=True, default = 0)
@@ -167,7 +185,9 @@ class Listing(models.Model):
     photo_5 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     photo_6 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     is_published = models.BooleanField(default=False)
+    is_available = models.BooleanField(default=True)
     list_date = models.DateTimeField('date created', blank=True, auto_now=True)
+    favourite = models.ManyToManyField(User, related_name="favourite", blank=True)
     
     def __str__(self):
         return self.title
@@ -193,9 +213,10 @@ class Listing(models.Model):
 
         
 
-        
+class Review(models.Model):
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.CharField(max_length=500)
 
-
-         
-    # def get_absolute_url(self):
-    #     return reverse('listing', kwargs={'pk': self.pk})
+    def __str__(self):
+        return self.content

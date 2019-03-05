@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% block title %} | Make Payment  {% endblock %}
+
+ {% block content %}
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+            <form id="checkout" method="POST" action="{% url 'checkout' listing.id %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="Phone">Phone</label>
+                    <input type="text" name="phone" class="form-control" placeholder="07XXXXXXXX" required>
+                    <a href="javascript:{document.getElementById('checkout').submit()}" class="btn btn-info btn-sm mt-1 mb-1">Pay 5000</a>
+                </div>
+             </div>
+          </form>
+      </div>
+  </div>
+ </div>
+
+
+ {% endblock %}

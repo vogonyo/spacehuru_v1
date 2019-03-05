@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+ {% block content %}
+ <div class="container">
+    <div class="alert alert-success alert-block alert-dismissible fade show" role="alert">
+        You have been successfully logged out of Spacehuru. Come back soon!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+    </div>
+    <section id="work" class="bg-dark text-white mb-5 text-center">
+          <h2>Add your space!</h2>
+          <h5 class="lead">Did you know you can make more money from your space on spacehuru?Make money from idle spaces</h5>
+          <h5 class="lead">Brands like <strong>ihub,</strong><strong>Villa Rossa Kempinski</strong> use Spacehuru to make more money!</h5>
+
+         <hr>
+        <a href="{% url 'listing-create' %}" class="btn btn-secondary text-white btn-lg">Create Space</a>
+     </section>
+</div>
+
+{% endblock %}
