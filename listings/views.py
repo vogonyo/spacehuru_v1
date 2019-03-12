@@ -13,11 +13,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .choices import price_choices, city_choices, bedroom_choices, category_choices
 from .models import Listing, Review
-from .payments import simulatePayment
+from .payments import simulatePayment, query
 from django.urls import reverse
 from users.models import Profile
 from contacts.models import Contact
-
+import datetime
+import urllib.request
 
 class ListingListView(ListView):
     model = Listing
@@ -26,6 +27,7 @@ class ListingListView(ListView):
     ordering = ['-list_date']
     queryset = Listing.objects.filter(is_published=True)
     paginate_by = 6
+
 
 class UserListingListView(ListView):
     model = Listing
@@ -36,6 +38,7 @@ class UserListingListView(ListView):
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         return Listing.objects.filter(realtor=user).order_by('-list_date')
+
 
 def listing_detail(request, pk):
     listing = get_object_or_404(Listing, id=pk)
@@ -52,8 +55,9 @@ def listing_detail(request, pk):
 
 class ListingCreateView(LoginRequiredMixin, CreateView):
     model = Listing
-    fields = ['category', 'title', 'address', 'area', 'city', 'description', 'price', 'billing', 'bedrooms','sqft', 'is_available', 'photo_main', 'photo_1', 'photo_2', 'photo_3', 'photo_4', 'photo_5', 'photo_6']
-
+    fields = ['category', 'used_for', 'title', 'address', 'area', 'city', 'description', 'price', 'billing', 'bedrooms','sqft', 'is_available', 'photo_main', 'photo_1', 'photo_2', 'photo_3', 'photo_4', 'photo_5', 'photo_6']
+    success_url = '/dashboard'
+    
     def form_valid(self, form):
         form.instance.realtor = self.request.user
         return super().form_valid(form)
@@ -63,7 +67,7 @@ class ListingCreateView(LoginRequiredMixin, CreateView):
 
 class ListingUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Listing
-    fields = ['category', 'title', 'address', 'area', 'city', 'description', 'price', 'billing', 'bedrooms', 'sqft', 'is_available', 'photo_main', 'photo_1', 'photo_2', 'photo_3', 'photo_4', 'photo_5', 'photo_6']
+    fields = ['category', 'used_for', 'title', 'address', 'area', 'city', 'description', 'price', 'billing', 'bedrooms', 'sqft', 'is_available', 'photo_main', 'photo_1', 'photo_2', 'photo_3', 'photo_4', 'photo_5', 'photo_6']
 
     def form_valid(self, form):
         form.instance.realtor = self.request.user
@@ -184,8 +188,11 @@ def checkout(request, listing_id):
     if request.method == 'POST':
         phone = request.POST['phone']
         simulatePayment(phone)
+        response = urllib.request.urlopen('https://darajambili.herokuapp.com/callback')
+        html = response.read()
         listing = get_object_or_404(Listing, pk=listing_id)
         listing.is_published = True
+        listing.created_at = datetime.datetime.now()
         listing.save()
         messages.success(request, 'Payment successful, listing is now Active')
         return redirect('/spaces/')
@@ -193,6 +200,7 @@ def checkout(request, listing_id):
         messages.error(request, 'Your payment was not successful')
         return redirect('/dashboard/')
 
+@login_required
 def bookings(request):
     user_contacts = Contact.objects.order_by('-contact_date').filter(user_id=request.user.id)
 
@@ -222,5 +230,5 @@ def favourite(request, listing_id):
         listing.favourite.remove(request.user)
     else:
         listing.favourite.add(request.user)
-    return redirect('/spaces/' + str(listing_id))
+    return HttpResponseRedirect(listing.get_absolute_url())
     

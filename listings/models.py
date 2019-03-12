@@ -77,7 +77,12 @@ class Listing(models.Model):
     SHOPS = 'SH'
     HOTELS = 'HT'
     RESTAURANTS = 'RT'
-    
+    RESORTS = 'RE'
+    SPA = 'SP'
+    GYM = 'GY'
+    VACATIONRENTAL = 'VR'
+    POPUP = 'PU'
+       
     
     #Billing Choices
     DAY = 'DY'
@@ -86,9 +91,27 @@ class Listing(models.Model):
     WEEK = 'WK'
     HOUR = 'HR'
     NIGHT = 'NT'
-    #Usage Choices
-    
+    PERSON = 'PE'
 
+    #Usage Choices
+    ACCOMMODATION = 'AC'
+    FUN = 'FU'
+    WELLNESS = 'WE'
+    FOOD = 'FO'
+    NIGHTLIFE = 'NL'
+    PARKING = 'PA'
+    WEDDINGS = 'WD'
+    CEVENTS = 'CE'
+    SEVENTS = 'SE'
+    TRAVEL = 'TR'
+    RETAIL = 'RE'
+    SHOPPING = 'SH'
+    CAMPING = 'CA'
+    ENTERTAINMENT = 'ET'
+    MEETUPS = 'ME'
+    OFFICE = 'OF'
+    OTHER = 'OT'
+    STORAGE = 'ST'
 
     AREA_CHOICES = {
         (WESTLANDS , 'Westlands'),
@@ -147,25 +170,56 @@ class Listing(models.Model):
     } 
 
     CATEGORY_CHOICES = (
-       (APARTMENTS, 'Apartments'),
+       (HOTELS, 'Hotel'),
+       (RESTAURANTS, 'Restaurant'),
+       (RESORTS, 'Resort'),
+       (SPA, 'Spa'),
+       (GYM, 'Gym'),
+       (APARTMENTS, 'Apartment'),
        (LAND, 'Land'),
        (COWORKING, 'Coworking'),
        (HOMES, 'Homes'),
        (OFFICES, 'Offices'),
        (STUDIOS, 'Studios'),
-       (WAREHOUSES, 'Warehouses'),
+       (WAREHOUSES, 'Warehouse'),
        (SHOPS, 'Shops'),
+       (VACATIONRENTAL, 'Vacation Rental'),
+       (POPUP, 'Pop Up Store'),
     )
+
     BILLING_CHOICES = (
         (HOUR, 'Hour'),
         (DAY, 'Day'),
         (MONTH, 'Month'),
         (WEEK, 'Week'),
         (DESK, 'Desk'),
-        (NIGHT, 'Night')
+        (NIGHT, 'Night'),
+        (PERSON, 'Person'),
+    )
+
+    USAGE_CHOICES = (
+        (ACCOMMODATION, 'Accommodation & Housing'),
+        (SHOPPING, 'Shopping'),
+        (FOOD, 'Food & Drink'),
+        (FUN, 'Fun & Experiences'),
+        (WELLNESS, 'Health & Wellness'),
+        (PARKING, 'Parking'),
+        (NIGHTLIFE, 'Nightlife'),
+        (SEVENTS, 'Social Events'),
+        (CEVENTS, 'Corporate Events'),
+        (WEDDINGS, 'Weddings'),
+        (RETAIL, 'Retail Shops'),
+        (CAMPING, 'Camping'),
+        (TRAVEL, 'Travel & Hospitality'),
+        (ENTERTAINMENT, 'Entertainment'),
+        (MEETUPS, 'MeetUps and Meetings'),
+        (OFFICE, 'Office & Co-Working'),
+        (STORAGE, 'Storage'),
+        (OTHER, 'Other Uses')
     )
 
     category = models.CharField(max_length=2, choices=CATEGORY_CHOICES)
+    used_for = models.CharField(max_length=200, choices=USAGE_CHOICES, default="OT")
     realtor = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     title = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
@@ -186,6 +240,7 @@ class Listing(models.Model):
     photo_6 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     is_published = models.BooleanField(default=False)
     is_available = models.BooleanField(default=True)
+    created_at = models.DateTimeField(default=datetime.datetime.now, blank=True)
     list_date = models.DateTimeField('date created', blank=True, auto_now=True)
     favourite = models.ManyToManyField(User, related_name="favourite", blank=True)
     
@@ -193,7 +248,7 @@ class Listing(models.Model):
         return self.title
     
     def get_absolute_url(self): 
-       return reverse("user-dashboard") 
+       return reverse("listing", kwargs={'pk': self.pk}) 
 
     
     def save(self, *args, **kwargs): 

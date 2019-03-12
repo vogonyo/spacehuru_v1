@@ -20,6 +20,8 @@ def brands(request):
     }
     return render(request, 'pages/brands.html', context)
 
+def tags(request):
+    return render(request, 'pages/tags.html')
 
 def blog(request):
     #Get All Realtors
@@ -30,6 +32,7 @@ def blog(request):
     
     }
     return render(request, 'pages/blogs.html', context)
+
 class ListingListView(ListView):
     model = Listing
     template_name = 'pages/index.html' #<app>/<model>_<vietype>.html
@@ -112,3 +115,118 @@ def search(request):
         'category_choices': category_choices
     }
     return render(request, 'pages/index.html', context)
+
+def travel_spaces(request):
+    listings = Listing.objects.filter(is_published=True, used_for='TR').order_by('-list_date')
+
+    context = {
+        'listings': listings
+    }
+
+    return render(request, 'listings/space_usage.html', context)
+
+def accommodation_spaces(request):
+    listings = Listing.objects.filter(is_published=True, used_for='AC').order_by('-list_date')
+
+    context = {
+        'listings': listings
+    }
+
+    return render(request, 'listings/space_usage.html', context)
+
+def office_spaces(request):
+    listings = Listing.objects.filter(is_published=True, used_for='OF').order_by('-list_date')
+
+    context = {
+        'listings': listings
+    }
+
+    return render(request, 'listings/space_usage.html', context)
+
+def retail_spaces(request):
+    listings = Listing.objects.filter(is_published=True, used_for='RE').order_by('-list_date')
+
+    context = {
+        'listings': listings
+    }
+
+    return render(request, 'listings/space_usage.html', context)
+
+
+def wedding_spaces(request):
+    listings = Listing.objects.filter(is_published=True, used_for='WD').order_by('-list_date')
+
+    context = {
+        'listings': listings
+    }
+
+    return render(request, 'listings/space_usage.html', context)
+
+
+def foodanddrink_spaces(request):
+    listings = Listing.objects.filter(is_published=True, used_for='FO').order_by('-list_date')
+
+    context = {
+        'listings': listings
+    }
+
+    return render(request, 'listings/space_usage.html', context)
+
+
+def wellness_spaces(request):
+    listings = Listing.objects.filter(is_published=True, used_for='WE').order_by('-list_date')
+
+    context = {
+        'listings': listings
+    }
+
+    return render(request, 'listings/space_usage.html', context)
+
+def storage_spaces(request):
+    listings = Listing.objects.filter(is_published=True, used_for='ST').order_by('-list_date')
+
+    context = {
+        'listings': listings
+    }
+
+    return render(request, 'listings/space_usage.html', context)
+
+def popup_spaces(request):
+    listings = Listing.objects.filter(is_published=True, used_for='RE').order_by('-list_date')
+
+    context = {
+        'listings': listings
+    }
+
+    return render(request, 'listings/space_usage.html', context)
+
+
+def shopping_spaces(request):
+    listings = Listing.objects.filter(is_published=True, used_for='SH').order_by('-list_date')
+
+    context = {
+        'listings': listings
+    }
+
+    return render(request, 'listings/space_usage.html', context)
+
+
+def fun_spaces(request):
+    listings = Listing.objects.filter(is_published=True, used_for='FU').order_by('-list_date')
+
+    context = {
+        'listings': listings
+    }
+
+    return render(request, 'listings/space_usage.html', context)
+
+
+def entertainment_spaces(request):
+    listings = Listing.objects.filter(is_published=True, used_for='ET').order_by('-list_date')
+
+    context = {
+        'listings': listings
+    }
+
+    return render(request, 'listings/space_usage.html', context)
+    

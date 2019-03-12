@@ -4,7 +4,7 @@ from .views import (
     ListingCreateView,
     ListingUpdateView,
     ListingDeleteView,
-    UserListingListView
+    UserListingListView,
 )
 from . import views
 
