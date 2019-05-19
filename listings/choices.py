@@ -100,5 +100,13 @@ category_choices = {
     'OF': 'Offices',
     'ST': 'Studios',
     'WR': 'Warehouse',
-    'SH': 'Shops'
+    'SH': 'Shop',
+    'HT': 'Hotel',
+    'RT': 'Restaurant',
+    'RE': 'Resort',
+    'SP': 'Spa',
+    'GY': 'Gym',
+    'VR': 'Vacation Rental',
+    'PU': 'Pop Up',
+    'GA': 'Garden'
 }

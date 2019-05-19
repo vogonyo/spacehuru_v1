@@ -13,12 +13,14 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .choices import price_choices, city_choices, bedroom_choices, category_choices
 from .models import Listing, Review
-from .payments import simulatePayment, query
+# from .payments import simulatePayment
+from django.http import JsonResponse
 from django.urls import reverse
 from users.models import Profile
 from contacts.models import Contact
+from django_daraja.mpesa.core import *
+from django_daraja.mpesa.core import MpesaClient
 import datetime
-import urllib.request
 
 class ListingListView(ListView):
     model = Listing
@@ -186,10 +188,14 @@ def makepayment(request, listing_id):
 
 def checkout(request, listing_id):
     if request.method == 'POST':
-        phone = request.POST['phone']
-        simulatePayment(phone)
-        response = urllib.request.urlopen('https://darajambili.herokuapp.com/callback')
-        html = response.read()
+        phone_number = request.POST['phone']
+        # simulatePayment(phone_number)
+        # cl = MpesaClient()
+        # cl.stk_push(phone_number, 2, 'qwertytrewq', 'For more coverage of website', 'https://darajambili.herokuapp.com/express-payment')
+        # body = request.body.decode()
+        # data = cl.parse_stk_result(body)
+        # result_code = data['ResultCode']
+        # if result_code == 0:
         listing = get_object_or_404(Listing, pk=listing_id)
         listing.is_published = True
         listing.created_at = datetime.datetime.now()

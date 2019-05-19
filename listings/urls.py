@@ -1,4 +1,5 @@
 from django.urls import path, reverse
+from django.conf.urls import url, include
 from .views import (
     ListingListView, 
     ListingCreateView,
@@ -16,6 +17,7 @@ urlpatterns = [
     path('<int:listing_id>/favourite', views.favourite, name='favourite'),
     path('<int:listing_id>/publish/pay', views.makepayment, name='make-payment'),
     path('<int:listing_id>/publish/checkout', views.checkout, name='checkout'),
+    # path('daraja/stk-push', views.stk_push_callback, name='mpesa_stk_push_callback'),
     path('add/', ListingCreateView.as_view(), name='listing-create'),
     path('<int:pk>/update', ListingUpdateView.as_view(), name='listing-update'),
     path('<int:pk>/delete', ListingDeleteView.as_view(), name='listing-delete'),

@@ -82,6 +82,7 @@ class Listing(models.Model):
     GYM = 'GY'
     VACATIONRENTAL = 'VR'
     POPUP = 'PU'
+    GARDEN = 'GA'
        
     
     #Billing Choices
@@ -101,14 +102,13 @@ class Listing(models.Model):
     NIGHTLIFE = 'NL'
     PARKING = 'PA'
     WEDDINGS = 'WD'
-    CEVENTS = 'CE'
-    SEVENTS = 'SE'
+    EVENTS = 'EV'
     TRAVEL = 'TR'
     RETAIL = 'RE'
     SHOPPING = 'SH'
     CAMPING = 'CA'
     ENTERTAINMENT = 'ET'
-    MEETUPS = 'ME'
+    MEETINGS = 'ME'
     OFFICE = 'OF'
     OTHER = 'OT'
     STORAGE = 'ST'
@@ -185,6 +185,7 @@ class Listing(models.Model):
        (SHOPS, 'Shops'),
        (VACATIONRENTAL, 'Vacation Rental'),
        (POPUP, 'Pop Up Store'),
+       (GARDEN, 'Garden')
     )
 
     BILLING_CHOICES = (
@@ -205,14 +206,13 @@ class Listing(models.Model):
         (WELLNESS, 'Health & Wellness'),
         (PARKING, 'Parking'),
         (NIGHTLIFE, 'Nightlife'),
-        (SEVENTS, 'Social Events'),
-        (CEVENTS, 'Corporate Events'),
+        (EVENTS, 'Events'),
         (WEDDINGS, 'Weddings'),
         (RETAIL, 'Retail Shops'),
         (CAMPING, 'Camping'),
         (TRAVEL, 'Travel & Hospitality'),
         (ENTERTAINMENT, 'Entertainment'),
-        (MEETUPS, 'MeetUps and Meetings'),
+        (MEETINGS, 'MeetUps and Meetings'),
         (OFFICE, 'Office & Co-Working'),
         (STORAGE, 'Storage'),
         (OTHER, 'Other Uses')

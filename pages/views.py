@@ -221,8 +221,8 @@ def fun_spaces(request):
     return render(request, 'listings/space_usage.html', context)
 
 
-def entertainment_spaces(request):
-    listings = Listing.objects.filter(is_published=True, used_for='ET').order_by('-list_date')
+def event_spaces(request):
+    listings = Listing.objects.filter(is_published=True, used_for='EV').order_by('-list_date')
 
     context = {
         'listings': listings
@@ -230,3 +230,28 @@ def entertainment_spaces(request):
 
     return render(request, 'listings/space_usage.html', context)
     
+def meeting_spaces(request):
+    listings = Listing.objects.filter(is_published=True, used_for='ME').order_by('-list_date')
+
+    context = {
+        'listings': listings
+    }
+
+    return render(request, 'listings/space_usage.html', context)
+
+def parking_spaces(request):
+    listings = Listing.objects.filter(is_published=True, used_for='PA').order_by('-list_date')
+    context = {
+        'listings': listings
+    }
+
+    return render(request, 'listings/space_usage.html', context)
+
+
+def entertainment_spaces(request):
+    listings = Listing.objects.filter(is_published=True, used_for='ET').order_by('-list_date')
+    context = {
+        'listings': listings
+    }
+
+    return render(request, 'listings/space_usage.html', context)

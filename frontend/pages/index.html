@@ -10,10 +10,9 @@
       <div class="home-search p-5">
         <div class="overlay p-5">
           <h1 class="display-4 mb-4">
-            Property Searching Just Got So Easy
+            Search for a spacehuru
           </h1>
-          <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae quas, asperiores eveniet vel nostrum magnam
-            voluptatum tempore! Consectetur, id commodi!</p>
+          <p class="lead">The biggest brands use spacehuru</p>
           <div class="search">
             <form action="{% url 'search' %}">
             <!-- Form Row 1 -->
@@ -53,9 +52,9 @@
               <!-- Form Row 3 -->
               <div class="form-row">
                 <div class="col-md-6 mb-3">
-                  <label class="sr-only">Bedrooms</label>
+                  <label class="sr-only">Rooms</label>
                   <select name="bedrooms" class="form-control">
-                    <option selected="true" disabled="disabled">Bedrooms (All)</option>
+                    <option selected="true" disabled="disabled">Rooms (All)</option>
                     {% for key, value in bedroom_choices.items %}
                     <option value="{{ key }}">{{ value }}</option>
                     {% endfor %}           
@@ -87,46 +86,44 @@
         {% if listings %}
            {% for listing in listings %}
            <div class="col-md-6 col-lg-4 mb-4">
-              <div class="card listing-preview">
-                <img class="card-img-top" src="{{ listing.photo_main.url }}" alt="">
+            <div class="card listing-preview">
+              <img class="card-img-top" src="{{ listing.photo_main.url }}" alt="">
                 <div class="card-img-overlay">
+                  <div class="row justify-content-between">
+                   <div class="col-4">
                   <h2>
-                    <span class="badge badge-secondary text-white">{{ listing.get_category_display }}</span>
-                  </h2>
-                </div>
-                <div class="card-body">
-                  <div class="listing-heading text-center">
-                    <h4 class="text-primary">{{ listing.title }}</h4>
-                    <p>
-                      <i class="fas fa-map-marker text-secondary"></i>{{ listing.address }}</p>
+                    <span class="badge badge-secondary text-white mx-auto ">{{ listing.get_category_display }}</span>
+                   </h2>
                   </div>
-                  <hr>
-                  <div class="row py-2 text-secondary">
-                    <div class="col-6">
-                      <i class="fas fa-th-large"></i> Sqft: {{ listing.sqft }}</div>
-                    <div class="col-6">
-                      <i class="fas fa-car"></i> Price: {{ listing.price }}</div>
-                  </div>
-                  <div class="row py-2 text-secondary">
-                    <div class="col-6">
-                      <i class="fas fa-bed"></i> Bedrooms: {{ listing.bedrooms }}</div>
-                    <div class="col-6">
-                      <i class="fas fa-bath"></i> Bathrooms: {{ listing.bathrooms }}</div>
-                  </div>
-                  <hr>
-                  <div class="row py-2 text-secondary">
-                    <div class="col-6">
-                    <i class="fas fa-user"></i> <a class="mr-2" href="{% url 'user-listings' listing.realtor.username %}">{{ listing.realtor }}</a></div>
-                  </div>
-                  <div class="row text-secondary pb-2">
-                    <div class="col-12">
-                      <i class="fas fa-clock"></i>{{ listing.list_date | naturaltime }}</div>
-                  </div>
-                  <hr>
-                  <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block">More Info</a>
-                </div>
-              </div>
-            </div>
+                   
+                 </div>
+               </div>
+                 <div class="card-body">
+                 <div class="listing-heading ">
+                    <h4 class="text-primary">{{ listing.title | truncatewords:3 }}</h4>
+                      <p>
+                        <i class="fas fa-map-marker text-primary"></i> {{ listing.address }}</p>
+                   </div>
+                      <hr>
+                         <div class="row text-muted text-primary pb-2">
+                           <div class="col-12">{{ listing.get_used_for_display }}</div></div>
+                           <div class="row text-muted text-primary pb-2">
+                             <div class="col-12">
+                              Space By <i class="fas fa-user"></i><a class="mr-2" href="{% url 'user-listings' listing.realtor.username %}">{{ listing.realtor }}</a>
+                           </div>
+                         </div>
+                         
+                         <div class="row py-2 text-muted ">
+                             <div class="col-12">
+                               KES {{listing.price | intcomma }} Per {{ listing.get_billing_display }} 
+                                </div>
+                           </div>
+                         <hr>
+                         <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block">More Info</a>
+                         </div>
+                     </div>
+                   </div>
+                   
     
            {% endfor %}
         {% else %}
@@ -138,32 +135,124 @@
       </div>
     </div>
   </section>
-
-  <section id="services" class="py-5 bg-secondary text-white">
-    <div class="container">
-      <div class="row text-center">
-        <div class="col-md-4">
-          <i class="fas fa-comment fa-4x mr-4"></i>
-          <hr>
-          <h3>Consulting Services</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
-            hic dignissimos ratione ea quae.</p>
+  <section id="type1">
+  <div class="container py-3">
+    <div class="card-deck">
+    <div class="card">
+      <a href="{% url 'wedding-spaces'%}">
+        <img class="card-img-top" src="https://lh3.googleusercontent.com/rkRZWMDZ5IbMOQyD-B08k9wKYOIvzW4PI6ToNfEE6nyTjT7WENssrTZU00EnT7clGUxRO_Mz_sq8_BSmIFIjEFMQjjIffqmZ=s750" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Spaces For Weddings</h5>
+          <p class="card-text"></p>
         </div>
-        <div class="col-md-4">
-          <i class="fas fa-home fa-4x mr-4"></i>
-          <hr>
-          <h3>Propery Management</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
-            hic dignissimos ratione ea quae.</p>
+    </a>
+  </div>
+  <div class="card">
+    <a href="{% url 'travel-spaces'%}">
+        <img class="card-img-top" src="http://static.asiawebdirect.com/m/bangkok/portals/bali-indonesia-com/homepage/top10/top10-budget-hotels-sanur/pagePropertiesImage/top10-budget-hotels-sanur.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Spaces For Travel & Hospitality</h5>
+          <p class="card-text"></p>
         </div>
-        <div class="col-md-4">
-          <i class="fas fa-suitcase fa-4x mr-4"></i>
-          <hr>
-          <h3>Renting & Selling</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
-            hic dignissimos ratione ea quae.</p>
-        </div>
+      </a>
+    </div>
+    </div>
+  </div>
+</section>
+<section id="type1">
+    <div class="container py-3">
+      <div class="card-deck">
+      <div class="card">
+        <a href="{% url 'accommodation-spaces'%}">
+          <img class="card-img-top" src="https://t-ec.bstatic.com/images/hotel/max1024x768/672/67256505.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Spaces For Accomodation</h5>
+            <p class="card-text"></p>
+          </div>
+      </a>
+    </div>
+    <div class="card">
+      <a href="{% url 'popup-spaces'%}">
+          <img class="card-img-top" src="https://blog-content.thestorefront.com/mag/wp-content/uploads/2017/07/pop-up-store-gecko.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Spaces For Pop up Stores</h5>
+            <p class="card-text"></p>
+          </div>
+        </a>
+      </div>
       </div>
     </div>
   </section>
-  {% endblock %}
+  <section id="type1">
+      <div class="container py-3">
+        <div class="card-deck">
+        <div class="card">
+          <a href="{% url 'office-spaces'%}">
+            <img class="card-img-top" src="https://twigcowork.com/wp-content/uploads/2018/04/Twig-3.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Spaces for Office & Co-work</h5>
+              <p class="card-text"></p>
+            </div>
+        </a>
+      </div>
+      <div class="card">
+        <a href="{% url 'foodanddrink-spaces'%}">
+            <img class="card-img-top" src="http://lyraoko.com/wp-content/uploads/2017/03/nyama-mama-delta-lyra-aoko-11.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Spaces For Food & Drink</h5>
+              <p class="card-text"></p>
+            </div>
+          </a>
+        </div>
+        </div>
+      </div>
+    </section>
+    <section id="type1">
+        <div class="container py-3">
+          <div class="card-deck">
+          <div class="card">
+            <a href="{% url 'wellness-spaces'%}">
+              <img class="card-img-top" src="https://media.glassdoor.com/l/ca/60/90/4d/free-weights-in-the-gym.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Spaces for Health & Wellness</h5>
+                <p class="card-text"></p>
+              </div>
+          </a>
+        </div>
+        <div class="card">
+          <a href="{% url 'fun-spaces'%}">
+              <img class="card-img-top" src="http://planetrovers.com/wp-content/uploads/2016/09/maxresdefault-1.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Spaces For Fun & Experiences </h5>
+                <p class="card-text"></p>
+              </div>
+            </a>
+          </div>
+          </div>
+        </div>
+      </section>
+      <section id="type1">
+        <div class="container py-3">
+          <div class="card-deck">
+          <div class="card">
+            <a href="{% url 'meeting-spaces'%}">
+              <img class="card-img-top" src="https://www.ncl.com/sites/default/files/MeetingRoom.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Spaces for Meetings</h5>
+                <p class="card-text"></p>
+              </div>
+          </a>
+        </div>
+        <div class="card">
+          <a href="{% url 'event-spaces'%}">
+              <img class="card-img-top" src="https://boomtownbrew.com/wp-content/uploads/2018/03/Boomtown-Private-Event-Space-7-1030x686.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Spaces For Events </h5>
+                <p class="card-text"></p>
+              </div>
+            </a>
+          </div>
+          </div>
+        </div>
+      </section>
+     {% endblock %}

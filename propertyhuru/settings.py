@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'listings.apps.ListingsConfig',
     'realtors.apps.RealtorsConfig',
     'blog.apps.BlogConfig',
+    'django_daraja',
     'crispy_forms',
     'contacts.apps.ContactsConfig',
     'users.apps.UsersConfig',
@@ -157,3 +158,12 @@ from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
+
+
+MPESA_ENVIRONMENT = 'sandbox'
+MPESA_CONSUMER_KEY = 'GumpL70YFBHx5G4Dj3UfbwagEVnO4z12'
+MPESA_CONSUMER_SECRET = 'HnAy7hiRGrHn2Tff'
+MPESA_SHORTCODE = '174379'
+MPESA_EXPRESS_SHORTCODE = '174379'
+MPESA_SHORTCODE_TYPE = 'paybill'
+MPESA_PASSKEY = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919'
