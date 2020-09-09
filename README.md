@@ -10,3 +10,8 @@ Some of the features in this project include:
   - Admin functionality to allow admin to edit or delete any property
   - Pagination also implemented
   
+## Technologies used
+ - AWS
+ - Django2, Python3
+ - Daraja API
+ - PostgreSQL
